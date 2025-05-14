@@ -78,7 +78,7 @@ For example, to enable the MCP server in your workspace, create a `.vscode/mcp.j
 
 2. **Start the server:**
     ```sh
-    uv run python main.py
+    uv run python -m mong_mcp_server
     ```
 
 ## License
