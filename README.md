@@ -81,6 +81,14 @@ For example, to enable the MCP server in your workspace, create a `.vscode/mcp.j
     uv run python -m mong_mcp_server
     ```
 
+## Running Tests
+
+Run the unit tests to verify the server functionality:
+
+```sh
+uv run python -m unittest discover tests/
+```
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
