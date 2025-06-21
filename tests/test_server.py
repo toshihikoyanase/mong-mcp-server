@@ -11,8 +11,7 @@ class TestMongMCPServer(unittest.TestCase):
         mock_mcp_instance = MagicMock()
         mock_fastmcp.return_value = mock_mcp_instance
 
-        with patch('mong_mcp_server.server.FastMCP.run'):
-            main()
+        main()
 
         mock_fastmcp.assert_called_once_with(
             "mong-mcp-server",
@@ -25,13 +24,12 @@ class TestMongMCPServer(unittest.TestCase):
         mock_mcp_instance = MagicMock()
         mock_fastmcp.return_value = mock_mcp_instance
 
-        with patch('mong_mcp_server.server.FastMCP.run'):
-            main()
+        main()
 
-        mock_mcp_instance.tool.assert_called_once()
-        call_args = mock_mcp_instance.tool.call_args
-        self.assertEqual(call_args[1]['name'], 'get_random_name')
-        self.assertEqual(call_args[1]['description'], 'Generate a random name like Docker does.')
+        mock_mcp_instance.tool.assert_called_once_with(
+            name='get_random_name',
+            description='Generate a random name like Docker does.'
+        )
 
     @patch('mong_mcp_server.server.FastMCP')
     def test_server_run_called(self, mock_fastmcp):
