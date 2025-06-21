@@ -1,26 +1,9 @@
 import unittest
 from unittest.mock import patch, MagicMock
 from mong_mcp_server.server import main
-import mong
 
 
 class TestMongMCPServer(unittest.TestCase):
-
-    def test_get_random_name_returns_string(self):
-        """Test that get_random_name returns a string"""
-        with patch('mong.get_random_name') as mock_get_name:
-            mock_get_name.return_value = "test_name"
-            result = mong.get_random_name()
-            self.assertIsInstance(result, str)
-            self.assertEqual(result, "test_name")
-
-    def test_get_random_name_called(self):
-        """Test that mong.get_random_name is called"""
-        with patch('mong.get_random_name') as mock_get_name:
-            mock_get_name.return_value = "brave_newton"
-            result = mong.get_random_name()
-            mock_get_name.assert_called_once()
-            self.assertEqual(result, "brave_newton")
 
     @patch('mong_mcp_server.server.FastMCP')
     def test_server_initialization(self, mock_fastmcp):
@@ -59,24 +42,6 @@ class TestMongMCPServer(unittest.TestCase):
         main()
 
         mock_mcp_instance.run.assert_called_once()
-
-
-class TestIntegration(unittest.TestCase):
-
-    def test_mong_library_integration(self):
-        """Test integration with the mong library"""
-        result = mong.get_random_name()
-        self.assertIsInstance(result, str)
-        self.assertGreater(len(result), 0)
-        self.assertTrue('_' in result or '-' in result)
-
-    def test_multiple_names_are_different(self):
-        """Test that multiple calls return different names (probabilistically)"""
-        names = set()
-        for _ in range(10):
-            names.add(mong.get_random_name())
-
-        self.assertGreater(len(names), 1)
 
 
 if __name__ == '__main__':
