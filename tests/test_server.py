@@ -37,7 +37,8 @@ class TestMongMCPServer(unittest.TestCase):
         mock_mcp_instance = MagicMock()
         mock_fastmcp.return_value = mock_mcp_instance
 
-        main()
+        with patch('mong_mcp_server.server.FastMCP.run'):
+            main()
 
         mock_mcp_instance.run.assert_called_once()
 
